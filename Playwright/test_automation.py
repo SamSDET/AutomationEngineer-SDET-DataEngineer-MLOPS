@@ -15,6 +15,11 @@ def test_UIChecks(playwright):
     driver.on("dialog", handle_popup)
     driver.get_by_role("button",name="Confirm").click()
     time.sleep(5)
+
+    driver.locator("#mousehover").hover()
+    time.sleep(30)
+    driver.get_by_role("link",name="Top").click()
+
     framedriver = driver.frame_locator("#courses-iframe")
     framedriver.get_by_role("link", name = "All Access plan").click()
     expect(framedriver.locator("body")).to_contain_text(" Happy Subscibers!")
