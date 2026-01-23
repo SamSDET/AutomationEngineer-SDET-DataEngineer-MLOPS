@@ -13,3 +13,9 @@ def test_Webtables(playwright):
     ricerow = driver.locator("tr").filter(has_text="Rice")   
     expect(ricerow.locator("td").nth(pricecolValue)).to_contain_text("37")
     
+    driver.goto("https://rahulshettyacademy.com/AutomationPractice/")
+    driver.locator("#mousehover").hover()
+    driver.get_by_role("link",name = "Top").click()
+    time.sleep(5)
+
+    
