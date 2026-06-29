@@ -18,3 +18,4 @@ def test_network_1(playwright: Playwright):
     order_text=driver1.locator(".mt-4").text_content() 
     print(order_text)
     driver1.pause()
+
