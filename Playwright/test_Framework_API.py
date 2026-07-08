@@ -1,11 +1,18 @@
+import json 
 from playwright.sync_api import Playwright, expect
-
 from Playwright.Utilities.APIBase import APIUtils
 
 def test_e2e_API_UI(playwright:Playwright):
     browser = playwright.chromium.launch(headless=False)
     context = browser.new_context()
     page = context.new_page()
+
+    #JASON FILE WITH USER DETAILS->util->acces into test 
+    with open('Playwright/data/credentials.json') as f:
+        test_data = json.load(f)
+        print(test_data)
+
+
 
     #Create Order
     apiUtils = APIUtils()

@@ -1,4 +1,6 @@
 from playwright.sync_api import Playwright
+from Utilities.APIBase import APIUtils 
+from playwright.sync_api import expect
 
 def intercept_request(route):
     route.continue_(url="https://rahulshettyacademy.com/api/ecom/order/get-orders-details?id=6a412bc4378febeacdd5b7e3")
@@ -21,6 +23,25 @@ def test_network_2(playwright: Playwright):
     else:
         print("Test failed: Expected message not found")
     #abdulwaheed1234@gmail.com/Samadtest123
+
+def test_session_storage(playwright: Playwright):
+    session = APIUtils()
+    tokenSam = session.getToken(playwright)
+    browser =playwright.chromium.launch(headless=False)
+    context = browser.new_context()
+    page = context.new_page()
+    page.add_init_script(f"""localStorage.setItem('token','{tokenSam}')""")
+    page.goto("https://rahulshettyacademy.com/client")
+    page.locator("button[routerlink='/dashboard/myorders']").click()
+    expect(page.get_by_text('Your Orders')).to_be_visible()
+    
+
+
+
+
+
+
+
 
     
     
